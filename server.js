@@ -8,6 +8,9 @@ const connectDB = require("./config/db");
 connectDB();
 const app = express();
 
+//middlewae
+app.use(express.json());
+
 //routes
 app.use("/api/v1/auth", require("./routes/authRoutes"));
 //port
