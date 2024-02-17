@@ -2,6 +2,8 @@ const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config/serverConfig");
+const router = require("../routes/authRoutes");
+const authMiddleware = require("../middleware/authMiddleware");
 const registerController = async (req, res) => {
   try {
     const existingUser = await userModel.findOne({ email: req.body.email });
@@ -83,7 +85,27 @@ const loginController = async (req, res) => {
   }
 };
 
+const currentUserController = async (req, res) => {
+  try {
+    console.log(req.body.userId);
+    const user = await userModel.findOne({ _id: req.body.userId });
+
+    res.status(200).send({
+      success: true,
+      message: "User Fetched Succesfully",
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Unable to get current user",
+    });
+  }
+};
+
 module.exports = {
   registerController,
   loginController,
+  currentUserController,
 };
