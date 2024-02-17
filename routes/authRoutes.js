@@ -15,4 +15,5 @@ router.post("/login", loginController);
 
 //current user
 router.get("/current-user", authMiddleware, currentUserController);
+
 module.exports = router;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>blood bank</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Blood Bank Portal</h1>
+    <div id="msg"></div>
+    <div class="flex-box">
+      <div class="login-form">
+        <form class="form-container" id="register-form">
+          <h2>Registration Form</h2>
+          <input type="text" id="role" placeholder="Enter the Role" />
+          <input type="text" id="name" placeholder="Enter the Name" />
+          <input type="text" id="email" placeholder="Enter the Email" />
+          <input type="text" id="password" placeholder="Enter the Password" />
+          <input type="text" id="address" placeholder="Enter the Address" />
+          <input type="text" id="phone" placeholder="Enter the Phone" />
+          <input type="submit" id="submit" value="submit" />
+        </form>
+      </div>
+
+      <div class="login-form">
+        <form class="form-container" id="login-form">
+          <h2>Login Form</h2>
+
+          <input type="text" id="login-email" placeholder="Enter the Email" />
+          <input
+            type="text"
+            id="login-password"
+            placeholder="Enter the Password"
+          />
+
+          <input type="submit" id="submit" value="submit" />
+        </form>
+        <div id="msg"></div>
+      </div>
+    </div>
+    <div class="current-user">
+      <button id="btn">get current user</button>
+      <div id="detail"></div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

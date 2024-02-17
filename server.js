@@ -8,6 +8,7 @@ const connectDB = require("./config/db");
 connectDB();
 const app = express();
 
+app.use(cors());
 //middlewae
 app.use(express.json());
 

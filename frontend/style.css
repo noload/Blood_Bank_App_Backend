@@ -1,0 +1,39 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 50%;
+  margin: auto;
+}
+input {
+  width: 100%;
+  height: 60px;
+  font-size: large;
+}
+#msg {
+  color: green;
+  font-size: larger;
+  margin-top: 10px;
+}
+.flex-box {
+  display: flex;
+  padding: 50px;
+  margin: 10px;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.current-user button {
+  padding: 10px;
+  background-color: red;
+}
