@@ -1,8 +1,9 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../config/serverConfig");
 const registerController = async (req, res) => {
   try {
-    console.log(req.body);
     const existingUser = await userModel.findOne({ email: req.body.email });
     //validation
     if (existingUser) {
@@ -32,6 +33,57 @@ const registerController = async (req, res) => {
   }
 };
 
+//login callback
+const loginController = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    if (!email || !password) {
+      res.status(404).json({
+        success: false,
+        message: "Please prrovide email and password",
+      });
+    }
+    const user = await userModel.findOne({ email: req.body.email });
+
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "User Not Found",
+      });
+    }
+    //compare password
+    const comparePassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!comparePassword) {
+      return res.status(500).send({
+        success: false,
+        message: "Invalid credintials",
+      });
+    }
+
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+      expiresIn: "1d",
+    });
+    return res.status(200).send({
+      success: true,
+      message: "Login successfully",
+      token,
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Login api",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   registerController,
+  loginController,
 };
